@@ -1,4 +1,5 @@
 import arcjet, { detectBot, fixedWindow } from "@/lib/arcjet";
+import ip from "@arcjet/ip";
 import { NextRequest, NextResponse } from "next/server";
 
 // Opt out of caching
@@ -24,10 +25,12 @@ const aj = arcjet
   );
 
 export async function GET(req: NextRequest) {
+  // Next.js 15 doesn't provide the IP address in the request object so we use
+  // the Arcjet utility package to parse the headers and find it
+  const userIp = ip(req);
   // The protect method returns a decision object that contains information
   // about the request.
-  const fingerprint = req.ip!;
-  const decision = await aj.protect(req, { fingerprint });
+  const decision = await aj.protect(req, { fingerprint: userIp });
 
   console.log("Arcjet decision: ", decision);
 

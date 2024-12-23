@@ -8,8 +8,8 @@
 # Arcjet + Fly.io example app
 
 [Arcjet](https://arcjet.com) helps developers protect their apps in just a few
-lines of code. This is an example application demonstrating the use of multiple
-features.
+lines of code. Bot detection. Rate limiting. Email validation. Attack
+protection. Data redaction. A developer-first approach to security.
 
 This example is deployed at
 [https://example.arcjet.com](https://example.arcjet.com).
@@ -28,19 +28,21 @@ This example is deployed at
 - [Attack protection](https://example.arcjet.com/attack) demonstrates Arcjet
   Shield, which detects suspicious behavior, such as SQL injection and
   cross-site scripting attacks.
+- [Sensitive info](https://example.arcjet.com/sensitive-info) protects against
+  clients sending you sensitive information such as PII that you do not wish to
+  handle.
 
 ##  Deploy to Fly.io
 
 1. Set up a new Fly.io app
 
 ```bash
-fly launch --name $YOUR_APP_NAME --no-deploy
+fly launch --no-deploy
 ```
 
-Replace `$YOUR_APP_NAME` with whatever name you'd like. This command will
-generate a `Dockerfile` and a `fly.toml` for you.
+This command will generate a `Dockerfile` and a `fly.toml` for you.
 
-2. Create an Arcjet account and link it to your Fly.io app:
+1. Create an Arcjet account and link it to your Fly.io app:
 
 ```bash
 fly ext arcjet create

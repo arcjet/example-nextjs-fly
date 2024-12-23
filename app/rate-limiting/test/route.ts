@@ -1,8 +1,9 @@
+import arcjet, { fixedWindow, shield } from "@/lib/arcjet";
 import { auth } from "@/lib/auth";
 import { setRateLimitHeaders } from "@arcjet/decorate";
-import arcjet, { fixedWindow, shield } from "@/lib/arcjet";
+import ip from "@arcjet/ip";
 import type { Session } from "next-auth";
-import { NextResponse, NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 // Opt out of caching
 export const dynamic = "force-dynamic";
@@ -44,8 +45,12 @@ export async function POST(req: NextRequest) {
 
   console.log("Session: ", session);
 
+  // Next.js 15 doesn't provide the IP address in the request object so we use
+  // the Arcjet utility package to parse the headers and find it
+  const userIp = ip(req);
+
   // Use the user ID if the user is logged in, otherwise use the IP address
-  const fingerprint = session?.user?.id ?? req.ip!;
+  const fingerprint = session?.user?.id ?? userIp;
 
   // The protect method returns a decision object that contains information
   // about the request.

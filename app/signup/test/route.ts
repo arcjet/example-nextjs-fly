@@ -1,6 +1,7 @@
 import { formSchema } from "@/app/signup/schema";
 import arcjet, { protectSignup, shield } from "@/lib/arcjet";
 import { NextRequest, NextResponse } from "next/server";
+import ip from "@arcjet/ip";
 
 // Add rules to the base Arcjet instance outside of the handler function
 const aj = arcjet
@@ -55,8 +56,12 @@ export async function POST(req: NextRequest) {
 
   const { email } = data.data;
 
-  const fingerprint = req.ip!;
-  const decision = await aj.protect(req, { fingerprint, email });
+  // Next.js 15 doesn't provide the IP address in the request object so we use
+  // the Arcjet utility package to parse the headers and find it
+  const userIp = ip(req);
+  // The protect method returns a decision object that contains information
+  // about the request.
+  const decision = await aj.protect(req, { fingerprint: userIp, email });
 
   console.log("Arcjet decision: ", decision);
 
