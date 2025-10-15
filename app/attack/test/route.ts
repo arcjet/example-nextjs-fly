@@ -1,6 +1,5 @@
+import { type NextRequest, NextResponse } from "next/server";
 import arcjet, { shield } from "@/lib/arcjet";
-import ip from "@arcjet/ip";
-import { NextRequest, NextResponse } from "next/server";
 
 // Opt out of caching
 export const dynamic = "force-dynamic";
@@ -15,13 +14,9 @@ const aj = arcjet.withRule(
 );
 
 export async function GET(req: NextRequest) {
-  // Next.js 15 doesn't provide the IP address in the request object so we use
-  // the Arcjet utility package to parse the headers and find it. If we're
-  // running in development mode, we'll use a local IP address.
-  const userIp = process.env.NODE_ENV === "development" ? "127.0.0.1" : ip(req);
   // The protect method returns a decision object that contains information
   // about the request.
-  const decision = await aj.protect(req, { fingerprint: userIp });
+  const decision = await aj.protect(req);
 
   console.log("Arcjet decision: ", decision);
 
@@ -31,7 +26,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   } else if (decision.isErrored()) {
     console.error("Arcjet error:", decision.reason);
-    if (decision.reason.message == "[unauthenticated] invalid key") {
+    if (decision.reason.message === "[unauthenticated] invalid key") {
       return NextResponse.json(
         {
           message:
@@ -41,7 +36,7 @@ export async function GET(req: NextRequest) {
       );
     } else {
       return NextResponse.json(
-        { v: "Internal server error: " + decision.reason.message },
+        { v: `Internal server error: ${decision.reason.message}` },
         { status: 500 },
       );
     }

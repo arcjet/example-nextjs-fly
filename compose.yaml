@@ -1,0 +1,19 @@
+services:
+  nextjs-fly:
+    build:
+      context: .
+      # fly will generate `Dockerfile` so we use a different name for local dev
+      dockerfile: Dockerfile.local
+    command: npm run dev
+    labels:
+      - dev.orbstack.domains=nextjs-fly.arcjet-examples.orb.local
+    env_file:
+      - .env.local
+    ports:
+      - 3000
+    volumes:
+      - .:/app
+      - nextjs-fly_node_modules:/app/node_modules
+
+volumes:
+  nextjs-fly_node_modules:

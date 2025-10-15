@@ -1,11 +1,7 @@
-import { EmailForm } from "@/components/EmailForm";
-import VisitDashboard from "@/components/compositions/VisitDashboard";
-import WhatNext from "@/components/compositions/WhatNext";
-import Divider from "@/components/elements/Divider";
 import type { Metadata } from "next";
 import Link from "next/link";
-
-import styles from "@/components/elements/PageShared.module.scss";
+import { WhatNext } from "@/components/compositions/WhatNext";
+import { EmailForm } from "@/components/EmailForm";
 
 export const metadata: Metadata = {
   title: "Signup form protection example",
@@ -14,104 +10,89 @@ export const metadata: Metadata = {
 };
 
 export default function IndexPage() {
-  const siteKey = process.env.ARCJET_SITE ? process.env.ARCJET_SITE : null;
-
   return (
-    <section className={styles.Content}>
-      <div className={styles.Section}>
-        <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-          Arcjet signup form protection
-        </h1>
-        <p className="max-w-[700px] text-lg">
+    <main className="page">
+      <div className="section">
+        <h1 className="heading-primary">Arcjet signup form protection</h1>
+        <p className="typography-primary">
           This form uses{" "}
           <Link
             href="https://docs.arcjet.com/signup-protection/concepts"
-            className="font-bold decoration-1 underline-offset-2 hover:underline"
+            className="link"
           >
             Arcjet&apos;s signup form protection
           </Link>{" "}
           which includes:
         </p>
-        <ul className="ms-8 max-w-[700px] list-outside list-disc text-secondary-foreground">
-          <li className="text-lg">
+        <ul className="list-bullets-primary">
+          <li>
             Arcjet server-side email verification configured to block disposable
             providers and ensure that the domain has a valid MX record.
           </li>
-          <li className="pt-4 text-lg">
+          <li>
             Rate limiting set to 5 requests over a 2 minute sliding window - a
             reasonable limit for a signup form, but easily configurable.
           </li>
-          <li className="pt-4 text-lg">
+          <li>
             Bot protection to stop automated clients from submitting the form.
           </li>
         </ul>
       </div>
 
-      <Divider />
+      <hr className="divider" />
 
-      <div className={styles.Section}>
-        <h2 className="text-xl font-bold">Try it</h2>
+      <div className="section">
+        <h2 className="heading-secondary">Try it</h2>
 
-        <div className="flex gap-4">
-          <EmailForm />
-        </div>
+        <EmailForm />
 
-        {siteKey && <VisitDashboard />}
-
-        <h2 className="text-xl font-bold">Test emails</h2>
-        <p className="text-secondary-foreground">
+        <h2 className="heading-secondary">Test emails</h2>
+        <p className="typography-secondary">
           Try these emails to see how it works:
         </p>
-        <ul className="ms-8 list-outside list-disc">
-          <li className="text-muted-foreground">
-            <code className="text-secondary-foreground">invalid.@arcjet</code>{" "}
-            – is an invalid email address.
+        <ul className="list-bullets-secondary">
+          <li>
+            <code>invalid.@arcjet</code> – is an invalid email address.
           </li>
-          <li className="pt-2 text-muted-foreground">
-            <code className="text-secondary-foreground">
-              test@0zc7eznv3rsiswlohu.tk
-            </code>{" "}
-            – is from a disposable email provider.
+          <li>
+            <code>test@0zc7eznv3rsiswlohu.tk</code>{" "}
+            <span>– is from a disposable email provider.</span>
           </li>
-          <li className="pt-2 text-muted-foreground">
-            <code className="text-secondary-foreground">
-              nonexistent@arcjet.ai
-            </code>{" "}
-            – is a valid email address & domain, but has no MX records.
+          <li>
+            <code>nonexistent@arcjet.ai</code> – is a valid email address &
+            domain, but has no MX records.
           </li>
         </ul>
       </div>
 
-      <Divider />
+      <hr className="divider" />
 
-      <div className={styles.Section}>
-        <h2 className="text-xl font-bold">See the code</h2>
-        <p className="text-secondary-foreground">
+      <div className="section">
+        <h2 className="heading-secondary">See the code</h2>
+        <p className="typography-secondary">
           The{" "}
           <Link
-            href="https://github.com/arcjet/example-nextjs/blob/main/app/signup/test/route.ts"
+            href="https://github.com/arcjet/example-nextjs-fly/blob/main/app/signup/test/route.ts"
             target="_blank"
             rel="noreferrer"
-            className="font-bold decoration-1 underline-offset-2 hover:underline"
+            className="link"
           >
             API route
           </Link>{" "}
           imports a{" "}
           <Link
-            href="https://github.com/arcjet/example-nextjs/blob/main/lib/arcjet.ts"
+            href="https://github.com/arcjet/example-nextjs-fly/blob/main/lib/arcjet.ts"
             target="_blank"
             rel="noreferrer"
-            className="font-bold decoration-1 underline-offset-2 hover:underline"
+            className="link"
           >
             centralized Arcjet client
           </Link>{" "}
           which sets base rules.
         </p>
       </div>
-
-      <Divider />
-
-      <WhatNext deployed={siteKey != null} />
-    </section>
+      <hr className="divider" />
+      <WhatNext />
+    </main>
   );
 }

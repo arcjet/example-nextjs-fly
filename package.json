@@ -1,15 +1,11 @@
 {
-  "name": "example-nextjs-fly",
+  "name": "@arcjet-examples/nextjs-fly",
   "description": "Arcjet Next.js + Fly.io example app. Arcjet helps developers protect their apps in just a few lines of code. Bot detection. Rate limiting. Email validation. Attack protection. Data redaction. A developer-first approach to security.",
   "license": "Apache-2.0",
   "homepage": "https://arcjet.com",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/arcjet/example-nextjs.git",
-    "directory": "arcjet"
-  },
+  "repository": "github:arcjet/example-nextjs-fly",
   "bugs": {
-    "url": "https://github.com/arcjet/example-nextjs/issues",
+    "url": "https://github.com/arcjet/examples/issues",
     "email": "support@arcjet.com"
   },
   "author": {
@@ -19,7 +15,7 @@
   },
   "private": true,
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "scripts": {
     "dev": "next dev",
@@ -29,45 +25,27 @@
     "lint:fix": "next lint --fix"
   },
   "dependencies": {
-    "@arcjet/decorate": "^1.0.0-beta.5",
-    "@arcjet/ip": "^1.0.0-beta.5",
-    "@arcjet/next": "^1.0.0-beta.5",
-    "@hookform/resolvers": "^5.0.1",
-    "@radix-ui/react-label": "^2.1.2",
-    "@radix-ui/react-slot": "^1.1.2",
-    "@types/styled-components": "^5.1.34",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "lucide-react": "0.487.0",
-    "next": "^15.2",
-    "next-auth": "^5.0.0-beta.25",
-    "next-themes": "^0.4.6",
-    "react": "^19",
-    "react-dom": "^19",
-    "react-hook-form": "^7.55",
-    "styled-components": "^6.1.17",
-    "tailwind-merge": "^2.5.5",
-    "tailwindcss-animate": "^1.0.7",
-    "zod": "^3.24.2"
+    "@arcjet/decorate": "1.0.0-beta.13",
+    "@arcjet/env": "1.0.0-beta.13",
+    "@arcjet/ip": "1.0.0-beta.13",
+    "@arcjet/next": "1.0.0-beta.13",
+    "@fontsource-variable/figtree": "5.2.9",
+    "@fontsource/ibm-plex-mono": "5.2.6",
+    "@hookform/resolvers": "5.2.2",
+    "@nosecone/next": "1.0.0-beta.13",
+    "@oddbird/css-anchor-positioning": "0.6.1",
+    "next": "15.5.3",
+    "next-themes": "0.4.6",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "react-hook-form": "7.62.0",
+    "zod": "3.25.76"
   },
   "devDependencies": {
-    "@flydotio/dockerfile": "^0.7.10",
-    "@types/node": "^22",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@typescript-eslint/parser": "^8",
-    "autoprefixer": "^10.4.21",
-    "eslint": "8",
-    "eslint-config-next": "^15.2",
-    "eslint-config-prettier": "^9",
-    "eslint-plugin-react": "^7",
-    "eslint-plugin-tailwindcss": "^3",
-    "postcss": "^8",
-    "sass": "^1",
-    "tailwindcss": "^3",
-    "typescript": "^5"
-  },
-  "overrides": {
-    "brace-expansion": "^2.0.2"
+    "@flydotio/dockerfile": "0.7.10",
+    "@types/node": "22.18.3",
+    "@types/react": "19.1.13",
+    "@types/react-dom": "19.1.9",
+    "typescript": "5.9.2"
   }
 }

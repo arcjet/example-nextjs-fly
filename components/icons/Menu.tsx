@@ -1,15 +1,14 @@
-import { forwardRef } from "react";
-
-interface Props {
+type Props = {
   classes?: string[];
-}
+};
 
-const Menu = forwardRef<SVGSVGElement, Props>((props: Props, ref) => {
+export function IconMenu(props: Props) {
   let cls = "icon icon-menu";
-  if (props.classes) cls += " " + props.classes.join(" ");
+  if (props.classes) cls = `${cls} ${props.classes.join(" ")}`;
 
   return (
-    <svg ref={ref} viewBox="0 0 128 128" className={cls} stroke="currentColor">
+    <svg viewBox="0 0 128 128" className={cls} stroke="currentColor">
+      <title>Menu</title>
       <path
         d="M12 66H116"
         strokeLinecap="round"
@@ -30,7 +29,4 @@ const Menu = forwardRef<SVGSVGElement, Props>((props: Props, ref) => {
       />
     </svg>
   );
-});
-Menu.displayName = "Menu";
-
-export default Menu;
+}

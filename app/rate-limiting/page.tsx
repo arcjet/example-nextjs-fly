@@ -1,13 +1,7 @@
-import { RLForm } from "@/components/RLForm";
-import { SignIn } from "@/components/SignIn";
-import { SignOut } from "@/components/SignOut";
-import WhatNext from "@/components/compositions/WhatNext";
-import Divider from "@/components/elements/Divider";
-import { auth } from "@/lib/auth";
 import type { Metadata } from "next";
 import Link from "next/link";
-
-import styles from "@/components/elements/PageShared.module.scss";
+import { WhatNext } from "@/components/compositions/WhatNext";
+import { RLForm } from "@/components/RLForm";
 
 export const metadata: Metadata = {
   title: "Rate limiting example",
@@ -15,19 +9,15 @@ export const metadata: Metadata = {
 };
 
 export default async function IndexPage() {
-  const session = await auth();
-
   return (
-    <section className={styles.Content}>
-      <div className={styles.Section}>
-        <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-          Arcjet rate limiting example
-        </h1>
-        <p className="max-w-[700px] text-lg">
+    <main className="page">
+      <div className="section">
+        <h1 className="heading-primary">Arcjet rate limiting example</h1>
+        <p className="typography--description">
           This page is protected by{" "}
           <Link
             href="https://docs.arcjet.com/bot-protection/concepts"
-            className="font-bold decoration-1 underline-offset-2 hover:underline"
+            className="link"
           >
             Arcjet&apos;s rate limiting
           </Link>
@@ -35,68 +25,44 @@ export default async function IndexPage() {
         </p>
       </div>
 
-      <Divider />
+      <hr className="divider" />
 
-      <div className={styles.Section}>
-        <h2 className="text-xl font-bold">Try it</h2>
+      <div className="section">
+        <h2 className="heading-secondary">Try it</h2>
         <RLForm />
-
-        {session?.user ? (
-          <>
-            <p className="text-green-500">
-              You are authenticated as {session.user?.email}
-              <span className="text-secondary-foreground">
-                {" "}
-                – the limit is set to 5 requests every 60 seconds.
-              </span>
-            </p>
-          </>
-        ) : (
-          <>
-            <p className="text-red-400">
-              You are not authenticated
-              <span className="text-secondary-foreground">
-                {" "}
-                – the limit is set to 2 requests every 60 seconds.
-              </span>
-            </p>
-          </>
-        )}
-
-        <p className="max-w-[700px] text-secondary-foreground">
+        <p>The limit is set to 2 requests every 60 seconds.</p>
+        <p className="typography--subtitle">
           Rate limits can be{" "}
           <Link
             href="https://docs.arcjet.com/reference/nextjs#ad-hoc-rules"
-            className="font-bold decoration-1 underline-offset-2 hover:underline"
+            className="link"
           >
             dynamically adjusted
           </Link>{" "}
           e.g. to set a limit based on the authenticated user.
         </p>
-
-        {session?.user ? <SignOut /> : <SignIn />}
       </div>
 
-      <Divider />
+      <hr className="divider" />
 
-      <div className={styles.Section}>
-        <h2 className="text-xl font-bold">See the code</h2>
-        <p className="text-secondary-foreground">
+      <div className="section">
+        <h2 className="heading-secondary">See the code</h2>
+        <p className="typography--subtitle">
           The{" "}
           <Link
-            href="https://github.com/arcjet/example-nextjs/blob/main/app/rate-limiting/test/route.ts"
+            href="https://github.com/arcjet/example-nextjs-fly/blob/main/app/rate-limiting/test/route.ts"
             target="_blank"
             rel="noreferrer"
-            className="font-bold decoration-1 underline-offset-2 hover:underline"
+            className="link"
           >
             API route
           </Link>{" "}
           imports a{" "}
           <Link
-            href="https://github.com/arcjet/example-nextjs/blob/main/lib/arcjet.ts"
+            href="https://github.com/arcjet/example-nextjs-fly/blob/main/lib/arcjet.ts"
             target="_blank"
             rel="noreferrer"
-            className="font-bold decoration-1 underline-offset-2 hover:underline"
+            className="link"
           >
             centralized Arcjet client
           </Link>{" "}
@@ -104,9 +70,9 @@ export default async function IndexPage() {
         </p>
       </div>
 
-      <Divider />
+      <hr className="divider" />
 
       <WhatNext />
-    </section>
+    </main>
   );
 }

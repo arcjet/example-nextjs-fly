@@ -1,10 +1,7 @@
-import { SupportForm } from "@/components/SuppportForm";
-import VisitDashboard from "@/components/compositions/VisitDashboard";
-import WhatNext from "@/components/compositions/WhatNext";
-import Divider from "@/components/elements/Divider";
-import styles from "@/components/elements/PageShared.module.scss";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { WhatNext } from "@/components/compositions/WhatNext";
+import { SupportForm } from "@/components/SupportForm";
 
 export const metadata: Metadata = {
   title: "Sensitive info detection example",
@@ -13,19 +10,17 @@ export const metadata: Metadata = {
 };
 
 export default function IndexPage() {
-  const siteKey = process.env.ARCJET_SITE ? process.env.ARCJET_SITE : null;
-
   return (
-    <section className={styles.Content}>
-      <div className={styles.Section}>
-        <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+    <main className="page">
+      <div className="section">
+        <h1 className="heading-primary">
           Arcjet sensitive info detection example
         </h1>
-        <p className="max-w-[700px] text-lg">
+        <p className="typography-primary">
           This form uses{" "}
           <Link
             href="https://docs.arcjet.com/sensitive-info/concepts"
-            className="font-bold decoration-1 underline-offset-2 hover:underline"
+            className="link"
           >
             Arcjet&apos;s sensitive info detection
           </Link>{" "}
@@ -33,44 +28,40 @@ export default function IndexPage() {
           configured to detect other types of sensitive information and custom
           patterns.
         </p>
-        <p className="max-w-[700px] text-secondary-foreground">
+        <p className="typography-secondary">
           The request is analyzed entirely on your server so no sensitive
           information is sent to Arcjet.
         </p>
       </div>
 
-      <Divider />
+      <hr className="divider" />
 
-      <div className={styles.Section}>
-        <h2 className="text-xl font-bold">Try it</h2>
+      <div className="section">
+        <h2 className="heading-secondary">Try it</h2>
 
-        <div className="flex gap-4">
-          <SupportForm />
-        </div>
-
-        {siteKey && <VisitDashboard />}
+        <SupportForm />
       </div>
 
-      <Divider />
+      <hr className="divider" />
 
-      <div className={styles.Section}>
-        <h2 className="text-xl font-bold">See the code</h2>
-        <p className="text-secondary-foreground">
+      <div className="section">
+        <h2 className="heading-secondary">See the code</h2>
+        <p className="typography-secondary">
           The{" "}
           <Link
-            href="https://github.com/arcjet/example-nextjs/blob/main/app/sensitive-info/test/route.ts"
+            href="https://github.com/arcjet/example-nextjs-fly/blob/main/app/sensitive-info/test/route.ts"
             target="_blank"
             rel="noreferrer"
-            className="font-bold decoration-1 underline-offset-2 hover:underline"
+            className="link"
           >
             API route
           </Link>{" "}
           imports a{" "}
           <Link
-            href="https://github.com/arcjet/example-nextjs/blob/main/lib/arcjet.ts"
+            href="https://github.com/arcjet/example-nextjs-fly/blob/main/lib/arcjet.ts"
             target="_blank"
             rel="noreferrer"
-            className="font-bold decoration-1 underline-offset-2 hover:underline"
+            className="link"
           >
             centralized Arcjet client
           </Link>{" "}
@@ -78,9 +69,9 @@ export default function IndexPage() {
         </p>
       </div>
 
-      <Divider />
+      <hr className="divider" />
 
-      <WhatNext deployed={siteKey != null} />
-    </section>
+      <WhatNext />
+    </main>
   );
 }

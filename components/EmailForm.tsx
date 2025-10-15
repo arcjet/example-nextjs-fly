@@ -1,42 +1,34 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { formSchema } from "@/app/signup/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { formSchema } from "@/app/signup/schema";
 
 export function EmailForm() {
   // Allows us to set an error message on the form.
   const {
+    register,
+    handleSubmit,
     setError,
-    formState: { errors },
-  } = useForm();
-  // Used to navigate to the welcome page after a successful form submission.
-  const router = useRouter();
-
-  // Set up the form with the Zod schema and a resolver.
-  const form = useForm<z.infer<typeof formSchema>>({
+    clearErrors,
+    formState: { errors, isSubmitting },
+  } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "nonexistent@arcjet.ai",
     },
   });
 
+  // Used to navigate to the welcome page after a successful form submission.
+  const router = useRouter();
+
   // Define a submit handler called when the form is submitted. It sends the
   // form data to an API endpoint and redirects to the welcome page on success.
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    clearErrors();
+
     // values is guaranteed to be of the correct type by the Zod schema.
     const result = await fetch("/signup/test", {
       body: JSON.stringify(values),
@@ -62,33 +54,38 @@ export function EmailForm() {
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="email" // The name of the field in the form schema.
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input
-                  type="email"
-                  placeholder="totoro@example.com"
-                  {...field}
-                />
-              </FormControl>
-              <FormDescription>
-                Just a test form - you won&apos;t receive any emails.
-              </FormDescription>
-              <FormMessage />
-              {errors.root?.serverError && (
-                <FormMessage>{errors.root.serverError.message}</FormMessage>
-              )}
-            </FormItem>
-          )}
-        />
-        <Button type="submit">Sign up</Button>
-      </form>
-    </Form>
+    <form onSubmit={handleSubmit(onSubmit)} className="form">
+      <div className="form-field">
+        <label className="form-label">
+          Email
+          <input
+            {...register("email", {
+              onChange: () => clearErrors(),
+            })}
+            type="email"
+            placeholder="totoro@example.com"
+            className="form-input"
+          />
+        </label>
+        <span className="form-description">
+          Just a test form - you won&apos;t receive any emails.
+        </span>
+        {errors.email && (
+          <span className="form-error">{errors.email.message}</span>
+        )}
+        {errors.root?.serverError && (
+          <span className="form-error">{errors.root.serverError.message}</span>
+        )}
+      </div>
+      <div className="form-button">
+        <button
+          type="submit"
+          className="button-primary"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "Signing up..." : "Sign up"}
+        </button>
+      </div>
+    </form>
   );
 }
