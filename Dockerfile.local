@@ -1,0 +1,16 @@
+# This Dockerfile is used for local development. For production run:
+# fly launch --no-deploy
+
+FROM node:24-bookworm
+
+WORKDIR /app
+
+EXPOSE 3000
+
+COPY package*.json ./
+RUN npm ci
+
+COPY . .
+RUN npm run build
+
+CMD ["npm", "run", "start"]

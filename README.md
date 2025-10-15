@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD033 MD041 -->
 <a href="https://arcjet.com" target="_arcjet-home">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://arcjet.com/logo/arcjet-dark-lockup-voyage-horizontal.svg">
@@ -11,8 +12,8 @@
 lines of code. Bot detection. Rate limiting. Email validation. Attack
 protection. Data redaction. A developer-first approach to security.
 
-This example is deployed at
-[https://example.arcjet.com](https://example.arcjet.com).
+This is an example Next.js application demonstrating the use of multiple
+features.
 
 ## Features
 
@@ -89,14 +90,32 @@ npm run dev
 
 5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
+## Need help?
+
+Check out [the docs](https://docs.arcjet.com/), [contact
+support](https://docs.arcjet.com/support), or [join our Discord
+server](https://arcjet.com/discord).
+
 ## Stack
 
 - Auth: [Auth.js](https://authjs.dev/)
 - App: [Next.js](https://nextjs.org/)
-- UI: [shadcn/ui](https://ui.shadcn.com/)
 - Form handling: [React Hook Form](https://react-hook-form.com/) (see also [our
   full form protection
-  example](https://github.com/arcjet/arcjet-js/tree/main/examples/nextjs-14-react-hook-form))
+  example](https://github.com/arcjet/example-nextjs-form))
 - Client-side validation: [Zod](https://zod.dev/)
 - Security: [Arcjet](https://arcjet.com/)
 - Platform: [Fly.io](https://fly.io/)
+
+## Contributing
+
+All development for Arcjet examples is done in the
+[`arcjet/examples` repository](https://github.com/arcjet/examples).
+
+You are welcome to open an issue here or in
+[`arcjet/examples`](https://github.com/arcjet/examples/issues) directly.
+However, please direct all pull requests to
+[`arcjet/examples`](https://github.com/arcjet/examples/pulls). Take a look at
+our
+[contributing guide](https://github.com/arcjet/examples/blob/main/CONTRIBUTING.md)
+for more information.

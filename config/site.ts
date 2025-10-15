@@ -1,9 +1,9 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Arcjet Next.js example app",
+  name: "Arcjet Next.js + Fly.io example app",
   description:
-    "An example Next.js application protected by Arcjet. Bot detection. Rate limiting. Email validation. Attack protection. Data redaction. A developer-first approach to security.",
+    "An example Next.js application protected by Arcjet and deployed to Fly.io. Bot detection. Rate limiting. Email validation. Attack protection. Data redaction. A developer-first approach to security.",
   mainNav: [
     {
       title: "Home",
