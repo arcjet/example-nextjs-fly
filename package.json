@@ -25,30 +25,29 @@
     "lint:fix": "next lint --fix"
   },
   "dependencies": {
-    "@arcjet/decorate": "1.14.1",
-    "@arcjet/env": "1.14.1",
-    "@arcjet/ip": "1.14.1",
-    "@arcjet/next": "1.14.1",
+    "@arcjet/decorate": "1.15.0",
+    "@arcjet/env": "1.15.0",
+    "@arcjet/ip": "1.15.0",
+    "@arcjet/next": "1.15.0",
     "@fontsource-variable/figtree": "5.3.0",
     "@fontsource/ibm-plex-mono": "5.3.0",
-    "@hookform/resolvers": "5.9.1",
-    "@nosecone/next": "1.14.1",
-    "next": "16.3.8",
+    "@hookform/resolvers": "5.9.2",
+    "@nosecone/next": "1.15.0",
+    "next": "16.4.2",
     "next-themes": "0.4.6",
-    "react": "19.3.0",
-    "react-dom": "19.3.0",
-    "react-hook-form": "7.88.0",
-    "zod": "4.6.5"
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "react-hook-form": "7.90.0",
+    "zod": "4.6.7"
   },
   "devDependencies": {
     "@flydotio/dockerfile": "0.7.10",
-    "@types/node": "22.20.3",
+    "@types/node": "22.20.5",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "typescript": "5.9.3"
   },
   "overrides": {
-    "diff": ">=8.0.3",
-    "postcss": ">=8.5.10"
+    "diff": ">=8.0.3"
   }
 }
